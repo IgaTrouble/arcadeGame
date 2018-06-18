@@ -2,6 +2,11 @@
 let maxP = 400;
 let minP = 0;
 
+//modal 
+let modal = document.querySelector(".modal");
+let playAgain = document.querySelector("#playAgain");
+let closeX = document.querySelector(".close"); 
+
 
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
@@ -70,6 +75,10 @@ Player.prototype.update = function(dt) {
 	}
 	if (this.y > maxP) {
 		this.y = maxP;
+	}
+	if (this.y <= -20) {
+		this.y = -20;
+		modal.style.display = "block";
 	}	
 }
 
@@ -96,7 +105,7 @@ Player.prototype.reset = function () {
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
-let allEnemies = [new Enemy(0, 70, 30), new Enemy(0, 150, 70), new Enemy(0, 235, 50)];
+let allEnemies = [new Enemy(0, 70, 50), new Enemy(0, 150, 90), new Enemy(0, 235, 70)];
 
 // Place the player object in a variable called player
 let player = new Player (200, 400);
@@ -122,6 +131,14 @@ document.addEventListener('keyup', function(e) {
 
 
 
+//close modal function
+closeX.addEventListener("click", function() {
+		 modal.style.display = "none";
+		 player.reset();
+ });
 
-
-
+// restart Game
+playAgain.addEventListener("click", function() {
+		modal.style.display = "none";
+		player.reset();
+ });
